@@ -38,9 +38,52 @@ export default function App() {
   const [history, setHistory] =
   useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    checkUser();
-  }, []);
+  let mounted = true;
+
+  const initAuth = async () => {
+    setLoading(true);
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!mounted) return;
+
+    if (session?.user) {
+      setUser(session.user);
+      fetchStocks(session.user.id);
+      fetchHistory();
+    } else {
+      setUser(null);
+    }
+
+    setLoading(false);
+  };
+
+  initAuth();
+
+  // 🔥 핵심: PWA 재실행 대비
+  const { data: listener } =
+    supabase.auth.onAuthStateChange((_event, session) => {
+      if (!mounted) return;
+
+      if (session?.user) {
+        setUser(session.user);
+        fetchStocks(session.user.id);
+        fetchHistory();
+      } else {
+        setUser(null);
+      }
+    });
+
+  return () => {
+    mounted = false;
+    listener.subscription.unsubscribe();
+  };
+}, []);
 
   async function fetchHistory() {
 
@@ -373,6 +416,10 @@ const totalProfitRate =
   );
 
 })
+
+if (loading) return <div>Loading...</div>;
+
+if (!user) return <Login />;
 
   return (
 

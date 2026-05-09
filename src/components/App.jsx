@@ -363,6 +363,10 @@ const totalProfitRate =
 
   }
 
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
+
   return (
     new Date(b.created_at) -
     new Date(a.created_at)

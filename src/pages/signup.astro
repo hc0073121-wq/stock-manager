@@ -1,0 +1,10 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import SignupForm from "../components/auth/SignupForm";
+---
+
+<MainLayout>
+  <div class="page-wrap">
+    <SignupForm client:load />
+  </div>
+</MainLayout>

@@ -1,0 +1,10 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import LoginForm from "../components/auth/LoginForm";
+---
+
+<MainLayout>
+  <div class="page-wrap">
+    <LoginForm client:load />
+  </div>
+</MainLayout>

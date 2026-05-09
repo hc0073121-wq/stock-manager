@@ -26,6 +26,10 @@ import PWAInstallButton from "../components/PWAInstallButton.jsx";
   <body>
     <slot />
 
+    <div class="pwa-wrapper">
+    <PWAInstallButton client:load />
+  </div>
+
     <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -33,13 +37,6 @@ import PWAInstallButton from "../components/PWAInstallButton.jsx";
     });
   }
 </script>
-
-
-<div id="splash">
-  Stock Manager
-</div>
-
-<PWAInstallButton client:load />
 
   </body>
 </html>

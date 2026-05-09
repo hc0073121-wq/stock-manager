@@ -1,6 +1,6 @@
 {
-  "name": "Stock Manager",
-  "short_name": "Stocks",
+  "name": "재고 관리자",
+  "short_name": "주식",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
